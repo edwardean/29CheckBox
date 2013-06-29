@@ -12,7 +12,7 @@ typedef NS_ENUM(NSInteger, CheckBoxAlignmentStyle) {
   CheckBoxAlignmentStyleVertical
 };
 
-typedef void (^CheckBoxCallback)(void);
+
 
 @interface ZHCustomCheckBox : UIControl
 

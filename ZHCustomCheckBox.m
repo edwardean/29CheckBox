@@ -11,6 +11,16 @@
 #define CheckBoxWidth   22  //CheckBox宽度
 #define CheckBoxHeight  22  //CheckBox高度
 #define CheckBoxGap     10  //每两个CheckBox之间的间隔距离
+
+typedef void (^CheckBoxCallback)(BOOL isHighlighted);
+CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
+{
+  if(isHighlighted) {
+    NSLog(@"Is Highlighted!");
+  } else {
+    NSLog(@"Not Highlighted");
+  }
+};
 @interface ZHCustomCheckBox () {
   
   /**
@@ -25,7 +35,10 @@
 @property (nonatomic, retain) UIImage *checkedImage;
 
 - (void)changeImageWithState:(UIControlState)state;
+
+- (void)addCallbackForCheckBox:(CheckBoxCallback)callback;
 @end
+
 @implementation ZHCustomCheckBox
 
 - (id)initCheckBoxWithFrame:(CGRect)frame
@@ -66,10 +79,28 @@
     }
 
   }
+//  
+//  BOOL isOK = NO;
+//  demoBlock(isOK);
+  SEL sel = NSSelectorFromString(@"Checked");
+  [self addTarget:self action:sel forControlEvents:UIControlEventTouchDown | UIControlEventTouchUpInside];
   return self;
+}
+
+- (void)Checked
+{
+  UIControlState state = self.state;
+  BOOL isNormal;
+  if (state == UIControlStateNormal) {
+    isNormal = YES;
+  } else {
+    isNormal = NO;
+  }
+  
+  demoBlock(isNormal);
 }
 - (void)setHighlighted:(BOOL)highlighted
 {
-  
+
 }
 @end
