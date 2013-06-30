@@ -16,9 +16,9 @@ typedef void (^CheckBoxCallback)(BOOL isHighlighted);
 CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 {
   if(isHighlighted) {
-    NSLog(@"Is Highlighted!");
+    //NSLog(@"Is Highlighted!");
   } else {
-    NSLog(@"Not Highlighted");
+    //NSLog(@"Not Highlighted");
   }
 };
 @interface ZHCustomCheckBox () {
@@ -47,60 +47,84 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 {
   self = [super initWithFrame:frame];
   if (self) {
+//    self.normalImage = [UIImage imageNamed:@"checked"];
+//    self.checkedImage = [UIImage imageNamed:@"unchecked"];
+//    self.imageView = [[UIImageView alloc] initWithImage:_normalImage];
+//    
+//    if (style == CheckBoxAlignmentStyleHorizontal) {
+//      HorizontalBoxNumber = frame.size.width / (CheckBoxWidth + CheckBoxGap / 2);
+//      for (int i=0; i<HorizontalBoxNumber; i++) {
+//        CGRect rect = frame;
+//        rect.origin.x += i * (CheckBoxWidth + CheckBoxGap / 2);
+//        CGFloat originX = rect.origin.x;
+//        CGFloat originY = rect.origin.y;
+//        UIImageView *imgView = [[UIImageView alloc] initWithImage:_checkedImage];
+//        imgView.center = CGPointMake(originX, originY);
+//        [self addSubview:imgView];
+//        
+//      }
+//    }
+//    
+//    if (style == CheckBoxAlignmentStyleVertical) {
+//      VerticalBoxNumber = frame.size.width / (CheckBoxHeight + CheckBoxGap / 2);
+//      for (int i=0; i<VerticalBoxNumber; i++) {
+//        CGRect rect = frame;
+//        rect.origin.y = i * (CheckBoxWidth + CheckBoxGap / 2);
+//        CGFloat originX = rect.origin.x;
+//        CGFloat originY = rect.origin.y;
+//        UIImageView *imgView = [[UIImageView alloc] initWithImage:_checkedImage];
+//        imgView.center = CGPointMake(originX, originY);
+//        [self addSubview:imgView];
+//      }
+//    }
+
     self.normalImage = [UIImage imageNamed:@"checked"];
     self.checkedImage = [UIImage imageNamed:@"unchecked"];
-    self.imageView = [[UIImageView alloc] initWithImage:_normalImage];
-    
-    if (style == CheckBoxAlignmentStyleHorizontal) {
-      HorizontalBoxNumber = frame.size.width / (CheckBoxWidth + CheckBoxGap / 2);
-      for (int i=0; i<HorizontalBoxNumber; i++) {
-        CGRect rect = frame;
-        rect.origin.x += i * (CheckBoxWidth + CheckBoxGap / 2);
-        CGFloat originX = rect.origin.x;
-        CGFloat originY = rect.origin.y;
-        UIImageView *imgView = [[UIImageView alloc] initWithImage:_checkedImage];
-        imgView.center = CGPointMake(originX, originY);
-        [self addSubview:imgView];
-        
-      }
+    self.imageView = [[UIImageView alloc] initWithFrame:frame];
+    [_imageView setImage:_normalImage];
+    self.selected = NO;
+    SEL selector = NSSelectorFromString(@"Checked");
+    if ([self respondsToSelector:selector]) {
+      [self addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+      [self addSubview:_imageView];
     }
-    
-    if (style == CheckBoxAlignmentStyleVertical) {
-      VerticalBoxNumber = frame.size.width / (CheckBoxHeight + CheckBoxGap / 2);
-      for (int i=0; i<VerticalBoxNumber; i++) {
-        CGRect rect = frame;
-        rect.origin.y = i * (CheckBoxWidth + CheckBoxGap / 2);
-        CGFloat originX = rect.origin.x;
-        CGFloat originY = rect.origin.y;
-        UIImageView *imgView = [[UIImageView alloc] initWithImage:_checkedImage];
-        imgView.center = CGPointMake(originX, originY);
-        [self addSubview:imgView];
-      }
-    }
-
   }
 //  
 //  BOOL isOK = NO;
 //  demoBlock(isOK);
-  SEL sel = NSSelectorFromString(@"Checked");
-  [self addTarget:self action:sel forControlEvents:UIControlEventTouchDown | UIControlEventTouchUpInside];
   return self;
 }
 
 - (void)Checked
 {
   UIControlState state = self.state;
-  BOOL isNormal;
-  if (state == UIControlStateNormal) {
-    isNormal = YES;
-  } else {
-    isNormal = NO;
-  }
-  
+  BOOL isNormal = (state == UIControlStateNormal) ? YES : NO;
+  self.selected = !self.selected;
+  self.highlighted = !self.highlighted;
   demoBlock(isNormal);
+}
+
+- (void)setSelected:(BOOL)selected
+{
+  [super setSelected:selected];
+  if (selected) {
+    NSLog(@"Selected");
+    [_imageView setImage:_checkedImage];
+  } else {
+    NSLog(@"Not Selected");
+    [_imageView setImage:_normalImage];
+  }
 }
 - (void)setHighlighted:(BOOL)highlighted
 {
+  [super setHighlighted:highlighted];
+  if (highlighted) {
+    NSLog(@"Is Highlighted!");
+    [_imageView setImage:_normalImage];
+  } else {
+    NSLog(@"Not Highlighted!");
+    [_imageView setImage:_checkedImage];
+  }
 
 }
 @end
