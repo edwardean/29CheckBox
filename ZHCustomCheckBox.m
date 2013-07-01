@@ -16,9 +16,9 @@ typedef void (^CheckBoxCallback)(BOOL isHighlighted);
 CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 {
   if(isHighlighted) {
-    //NSLog(@"Is Highlighted!");
+    NSLog(@"Is Highlighted!");
   } else {
-    //NSLog(@"Not Highlighted");
+    NSLog(@"Not Highlighted");
   }
 };
 @interface ZHCustomCheckBox () {
