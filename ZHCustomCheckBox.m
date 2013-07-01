@@ -86,7 +86,7 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
     SEL selector = NSSelectorFromString(@"Checked");
     if ([self respondsToSelector:selector]) {
       [self addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
-      [self addSubview:_imageView];
+      //[self addSubview:_imageView];
     }
 
     CGRect titleLabelRect = CGRectMake(0, 0, 50, 30);
@@ -114,11 +114,11 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
   [super setSelected:selected];
   if (selected) {
     NSLog(@"Selected");
-    [_imageView setImage:_checkedImage];
+    //[_imageView setImage:_checkedImage];
     [_titleLabel setText:@"Selected"];
   } else {
     NSLog(@"Not Selected");
-    [_imageView setImage:_normalImage];
+    //[_imageView setImage:_normalImage];
     [_titleLabel setText:@"Not Selected"];
   }
   [_titleLabel sizeToFit];
@@ -126,13 +126,29 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 - (void)setHighlighted:(BOOL)highlighted
 {
   [super setHighlighted:highlighted];
-  if (highlighted) {
-    NSLog(@"Is Highlighted!");
-    [_imageView setImage:_normalImage];
-  } else {
-    NSLog(@"Not Highlighted!");
-    [_imageView setImage:_checkedImage];
-  }
+  [self setNeedsDisplay];
+  
+//  if (highlighted) {
+//    NSLog(@"Is Highlighted!");
+//    [_imageView setImage:_normalImage];
+//  } else {
+//    NSLog(@"Not Highlighted!");
+//    [_imageView setImage:_checkedImage];
+//  }
 
+}
+
+- (void)drawRect:(CGRect)rect
+{
+  if (self.highlighted) {
+    [_normalImage drawInRect:CGRectMake(0.0, 0.0, _normalImage.size.width, _normalImage.size.height)];
+  } else if (self.selected) {
+    [_checkedImage drawInRect:CGRectMake(0.0, 0.0, _normalImage.size.width, _normalImage.size.height)];
+  }
+//  else {
+//    [_normalImage drawAtPoint:CGPointZero];
+//  }
+  
+ 
 }
 @end
