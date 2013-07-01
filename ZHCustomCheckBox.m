@@ -59,7 +59,7 @@
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x + 30, point.y, 0, 0)];
     [self addSubview:_checkBoxImageView];
     [self addSubview:_titleLabel];
-    [self setTitleText:@"ChechBox"];
+    [self setTitleText:@"UnChecked"];
     [self addTarget:self action:@selector(Checked:) forControlEvents:UIControlEventTouchUpInside];
   }
 
