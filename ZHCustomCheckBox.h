@@ -12,13 +12,27 @@ typedef NS_ENUM(NSInteger, CheckBoxAlignmentStyle) {
   CheckBoxAlignmentStyleVertical
 };
 
-
+typedef NS_ENUM(NSInteger, CheckBoxState) {
+  CheckBoxStateSelected   = 0,
+  CheckBoxStateHighlight  = 1 << 0,
+  CheckBoxStateNormal     = 1 << 1
+};
 
 @interface ZHCustomCheckBox : UIControl
 
 @property (nonatomic, retain) UILabel *titleLabel;
+@property (nonatomic, retain) UIImageView *checkBoxImageView;
+
+@property (nonatomic, assign) CheckBoxState checkBoxState;
+
+
+- (void)setCheckImage:(UIImage *)image forCheckBoxState:(BOOL)isChecked;
+
+- (void)setTitleText:(NSString *)text;
 
 - (id)initCheckBoxWithFrame:(CGRect)frame
               AligmentStyle:(CheckBoxAlignmentStyle)style
                     numbers:(NSInteger)number;
+
+
 @end

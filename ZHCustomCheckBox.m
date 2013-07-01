@@ -15,15 +15,15 @@
 /**
  简单的callback
  **/
-typedef void (^CheckBoxCallback)(BOOL isHighlighted);
-CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
-{
-  if(isHighlighted) {
-    NSLog(@"Is Highlighted!");
-  } else {
-    NSLog(@"Not Highlighted");
-  }
-};
+//typedef void (^CheckBoxCallback)(BOOL isHighlighted);
+//CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
+//{
+//  if(isHighlighted) {
+//    NSLog(@"Is Highlighted!");
+//  } else {
+//    NSLog(@"Not Highlighted");
+//  }
+//};
 @interface ZHCustomCheckBox () {
   
   /**
@@ -34,12 +34,13 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 }
 
 @property (nonatomic, retain) UIImageView *imageView;
+
 @property (nonatomic, retain) UIImage *normalImage;
 @property (nonatomic, retain) UIImage *checkedImage;
 
-- (void)changeImageWithState:(UIControlState)state;
-
-- (void)addCallbackForCheckBox:(CheckBoxCallback)callback;
+//- (void)changeImageWithState:(UIControlState)state;
+//
+//- (void)addCallbackForCheckBox:(CheckBoxCallback)callback;
 @end
 
 @implementation ZHCustomCheckBox
@@ -50,112 +51,46 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 {
   self = [super initWithFrame:frame];
   if (self) {
-//    self.normalImage = [UIImage imageNamed:@"checked"];
-//    self.checkedImage = [UIImage imageNamed:@"unchecked"];
-//    self.imageView = [[UIImageView alloc] initWithImage:_normalImage];
-//    
-//    if (style == CheckBoxAlignmentStyleHorizontal) {
-//      HorizontalBoxNumber = frame.size.width / (CheckBoxWidth + CheckBoxGap / 2);
-//      for (int i=0; i<HorizontalBoxNumber; i++) {
-//        CGRect rect = frame;
-//        rect.origin.x += i * (CheckBoxWidth + CheckBoxGap / 2);
-//        CGFloat originX = rect.origin.x;
-//        CGFloat originY = rect.origin.y;
-//        UIImageView *imgView = [[UIImageView alloc] initWithImage:_checkedImage];
-//        imgView.center = CGPointMake(originX, originY);
-//        [self addSubview:imgView];
-//        
-//      }
-//    }
-//    
-//    if (style == CheckBoxAlignmentStyleVertical) {
-//      VerticalBoxNumber = frame.size.width / (CheckBoxHeight + CheckBoxGap / 2);
-//      for (int i=0; i<VerticalBoxNumber; i++) {
-//        CGRect rect = frame;
-//        rect.origin.y = i * (CheckBoxWidth + CheckBoxGap / 2);
-//        CGFloat originX = rect.origin.x;
-//        CGFloat originY = rect.origin.y;
-//        UIImageView *imgView = [[UIImageView alloc] initWithImage:_checkedImage];
-//        imgView.center = CGPointMake(originX, originY);
-//        [self addSubview:imgView];
-//      }
-//    }
-
-    self.normalImage = [UIImage imageNamed:@"checked"];
-    self.checkedImage = [UIImage imageNamed:@"unchecked"];
-    self.imageView = [[UIImageView alloc] initWithFrame:frame];
-    [_imageView setImage:_normalImage];
-    SEL selector = NSSelectorFromString(@"Checked");
-    if ([self respondsToSelector:selector]) {
-      [self addTarget:self
-               action:selector
-     forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchDown];
-     //[self addSubview:_imageView];
-    }
-
-    CGRect titleLabelRect = CGRectMake(0, 0, 50, 30);
-    titleLabelRect.origin.x = frame.origin.x + 30;
-    titleLabelRect.origin.y = frame.origin.y;
-    UILabel *label = [[UILabel alloc] initWithFrame:titleLabelRect];
-    self.titleLabel = label;
+    CGPoint point = frame.origin;
+    [self setCheckImage:[UIImage imageNamed:@"checked.png"] forCheckBoxState:YES];
+    [self setCheckImage:[UIImage imageNamed:@"unchecked.png"] forCheckBoxState:NO];
+    self.checkBoxImageView = [[UIImageView alloc] initWithFrame:CGRectMake(point.x, point.y, 22, 22)];
+    [_checkBoxImageView setImage:[UIImage imageNamed:@"unchecked.png"]];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x + 30, point.y, 0, 0)];
+    [self addSubview:_checkBoxImageView];
     [self addSubview:_titleLabel];
+    [self setTitleText:@"ChechBox"];
+    [self addTarget:self action:@selector(Checked:) forControlEvents:UIControlEventTouchUpInside];
   }
 
   return self;
 }
 
-- (void)Checked
+- (void)setTitleText:(NSString *)text
 {
-  UIControlState state = self.state;
-  BOOL isNormal = (state == UIControlStateNormal) ? YES : NO;
-  self.selected = !self.selected;
-  self.highlighted = !self.highlighted;
-  demoBlock(isNormal);
+  [self.titleLabel setText:text];
+  [self.titleLabel sizeToFit];
 }
 
-- (void)setSelected:(BOOL)selected
+- (void)Checked:(id)sender
 {
-  [super setSelected:selected];
-  if (selected) {
-    NSLog(@"Selected");
-    //[_imageView setImage:_checkedImage];
-    [_titleLabel setText:@"Selected"];
+  [self setSelected:!self.selected];
+  if (self.isSelected) {
+    [self.checkBoxImageView setImage:_checkedImage];
+    [self setTitleText:@"Checked"];
   } else {
-    NSLog(@"Not Selected");
-    //[_imageView setImage:_normalImage];
-    [_titleLabel setText:@"Not Selected"];
+    [self.checkBoxImageView setImage:_normalImage];
+    [self setTitleText:@"UnChecked"];
   }
-  [_titleLabel sizeToFit];
 }
 
-
-- (void)setHighlighted:(BOOL)highlighted
+- (void)setCheckImage:(UIImage *)image forCheckBoxState:(BOOL)isChecked
 {
-  [super setHighlighted:highlighted];
-  [self setNeedsDisplay];
-  
-//  if (highlighted) {
-//    NSLog(@"Is Highlighted!");
-//    [_imageView setImage:_normalImage];
-//  } else {
-//    NSLog(@"Not Highlighted!");
-//    [_imageView setImage:_checkedImage];
-//  }
-
-}
-
-- (void)drawRect:(CGRect)rect
-{
-  if (self.highlighted) {
-    [_normalImage drawInRect:CGRectMake(0.0, 0.0, _normalImage.size.width, _normalImage.size.height)];
-  } else if (self.selected) {
-    [_checkedImage drawInRect:CGRectMake(0.0, 0.0, _normalImage.size.width, _normalImage.size.height)];
+  if (isChecked) {
+    self.normalImage = image;
+  } else {
+    self.checkedImage = image;
   }
-//  else {
-//    [_normalImage drawAtPoint:CGPointZero];
-//  }
-  
 }
-
 
 @end

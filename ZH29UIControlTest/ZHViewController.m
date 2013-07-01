@@ -19,7 +19,7 @@
   [super viewDidLoad];
   
   ZHCustomCheckBox *checkBox = [[ZHCustomCheckBox alloc]
-                                initCheckBoxWithFrame:CGRectMake(10, 10, 22, 22)
+                                initCheckBoxWithFrame:CGRectMake(10, 10, 70, 22)
                                         AligmentStyle:CheckBoxAlignmentStyleVertical
                                               numbers:10];
   [self.view addSubview:checkBox];
