@@ -88,10 +88,15 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
       [self addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
       [self addSubview:_imageView];
     }
+
+    CGRect titleLabelRect = CGRectMake(0, 0, 50, 30);
+    titleLabelRect.origin.x = frame.origin.x + 30;
+    titleLabelRect.origin.y = frame.origin.y;
+    UILabel *label = [[UILabel alloc] initWithFrame:titleLabelRect];
+    self.titleLabel = label;
+    [self addSubview:_titleLabel];
   }
-//  
-//  BOOL isOK = NO;
-//  demoBlock(isOK);
+
   return self;
 }
 
@@ -110,10 +115,13 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
   if (selected) {
     NSLog(@"Selected");
     [_imageView setImage:_checkedImage];
+    [_titleLabel setText:@"Selected"];
   } else {
     NSLog(@"Not Selected");
     [_imageView setImage:_normalImage];
+    [_titleLabel setText:@"Not Selected"];
   }
+  [_titleLabel sizeToFit];
 }
 - (void)setHighlighted:(BOOL)highlighted
 {
