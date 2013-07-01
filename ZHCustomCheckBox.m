@@ -12,6 +12,9 @@
 #define CheckBoxHeight  22  //CheckBox高度
 #define CheckBoxGap     10  //每两个CheckBox之间的间隔距离
 
+/**
+ 简单的callback
+ **/
 typedef void (^CheckBoxCallback)(BOOL isHighlighted);
 CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 {
@@ -82,11 +85,12 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
     self.checkedImage = [UIImage imageNamed:@"unchecked"];
     self.imageView = [[UIImageView alloc] initWithFrame:frame];
     [_imageView setImage:_normalImage];
-    self.selected = NO;
     SEL selector = NSSelectorFromString(@"Checked");
     if ([self respondsToSelector:selector]) {
-      [self addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
-      //[self addSubview:_imageView];
+      [self addTarget:self
+               action:selector
+     forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchDown];
+     //[self addSubview:_imageView];
     }
 
     CGRect titleLabelRect = CGRectMake(0, 0, 50, 30);
@@ -123,6 +127,8 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
   }
   [_titleLabel sizeToFit];
 }
+
+
 - (void)setHighlighted:(BOOL)highlighted
 {
   [super setHighlighted:highlighted];
@@ -149,6 +155,7 @@ CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
 //    [_normalImage drawAtPoint:CGPointZero];
 //  }
   
- 
 }
+
+
 @end
