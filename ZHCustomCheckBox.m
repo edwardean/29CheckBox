@@ -7,7 +7,7 @@
 //
 
 #import "ZHCustomCheckBox.h"
-
+#import <QuartzCore/QuartzCore.h>
 #define CheckBoxWidth   22  //CheckBox宽度
 #define CheckBoxHeight  22  //CheckBox高度
 #define CheckBoxGap     10  //每两个CheckBox之间的间隔距离
@@ -74,22 +74,33 @@
 
 - (void)Checked:(id)sender
 {
-  [self setSelected:!self.selected];
   if (self.isSelected) {
     [self.checkBoxImageView setImage:_checkedImage];
     [self setTitleText:@"Checked"];
+    NSLog(@"Selected");
   } else {
     [self.checkBoxImageView setImage:_normalImage];
     [self setTitleText:@"UnChecked"];
+    NSLog(@"UnSelected");
   }
+  [self setSelected:!self.selected];
 }
 
 - (void)setCheckImage:(UIImage *)image forCheckBoxState:(BOOL)isChecked
 {
   if (isChecked) {
-    self.normalImage = image;
-  } else {
     self.checkedImage = image;
+  } else {
+    self.normalImage = image;
+  }
+}
+
+- (void)setHighlighted:(BOOL)highlighted
+{
+  if (highlighted) {
+    NSLog(@"Highlight");
+  } else {
+    NSLog(@"UnHighlight");
   }
 }
 

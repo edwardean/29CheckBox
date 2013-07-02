@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA7796461782659300183DC7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7796451782659300183DC7 /* QuartzCore.framework */; };
 		CAD6877E177ED36000BA2A6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD6877D177ED36000BA2A6C /* UIKit.framework */; };
 		CAD68780177ED36000BA2A6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD6877F177ED36000BA2A6C /* Foundation.framework */; };
 		CAD68782177ED36000BA2A6C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD68781177ED36000BA2A6C /* CoreGraphics.framework */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA7796451782659300183DC7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CAD6877A177ED36000BA2A6C /* ZH29UIControlTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZH29UIControlTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD6877D177ED36000BA2A6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CAD6877F177ED36000BA2A6C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA7796461782659300183DC7 /* QuartzCore.framework in Frameworks */,
 				CAD6877E177ED36000BA2A6C /* UIKit.framework in Frameworks */,
 				CAD68780177ED36000BA2A6C /* Foundation.framework in Frameworks */,
 				CAD68782177ED36000BA2A6C /* CoreGraphics.framework in Frameworks */,
@@ -113,6 +116,7 @@
 		CAD6877C177ED36000BA2A6C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CA7796451782659300183DC7 /* QuartzCore.framework */,
 				CAD6877D177ED36000BA2A6C /* UIKit.framework */,
 				CAD6877F177ED36000BA2A6C /* Foundation.framework */,
 				CAD68781177ED36000BA2A6C /* CoreGraphics.framework */,
@@ -468,6 +472,7 @@
 				CAD687B4177ED36000BA2A6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAD687B5177ED36000BA2A6C /* Build configuration list for PBXNativeTarget "ZH29UIControlTestTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +481,7 @@
 				CAD687B7177ED36000BA2A6C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
