@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 //typedef NS_ENUM(NSInteger, CheckBoxAlignmentStyle) {
 //  CheckBoxAlignmentStyleHorizontal,
 //  CheckBoxAlignmentStyleVertical
@@ -28,12 +29,24 @@ typedef enum ZHCheckBoxStyle_ {
 @property (nonatomic, retain) UILabel *titleLabel;
 
 /**
-  CheckBox构造方法
+ CheckBox构造方法
  frame：checkBox的坐标大小
  style：checkBox的外观样式，目前有两种rect和round
  **/
-- (id)initCheckBoxWithFrame:(CGRect)frame
-              AligmentStyle:(ZHCheckBoxStyle)style;
 
+- (id)initCheckBoxWithFrame:(CGRect)frame
+						unSelectedTitle:(NSString *)unselectedTitle
+							selectedTitle:(NSString *)selectedTitle
+							CheckBoxStyle:(ZHCheckBoxStyle)style
+											block:(void(^)(void))block
+					 forControlEvents:(UIControlEvents)controlEvents;
+
+@end
+
+@interface BlockHandler : NSObject
+
+@property (nonatomic, copy) void (^blockCallBack)(void);
+
+- (void)invokeBlock:(id)sender;
 
 @end
