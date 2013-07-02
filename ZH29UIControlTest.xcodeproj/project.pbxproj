@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA4A560217826BCC00ADD9A9 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = CA4A560017826BCC00ADD9A9 /* checkbox.png */; };
+		CA4A560317826BCC00ADD9A9 /* checkbox2.png in Resources */ = {isa = PBXBuildFile; fileRef = CA4A560117826BCC00ADD9A9 /* checkbox2.png */; };
 		CA7796461782659300183DC7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7796451782659300183DC7 /* QuartzCore.framework */; };
 		CAD6877E177ED36000BA2A6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD6877D177ED36000BA2A6C /* UIKit.framework */; };
 		CAD68780177ED36000BA2A6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD6877F177ED36000BA2A6C /* Foundation.framework */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA4A560017826BCC00ADD9A9 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
+		CA4A560117826BCC00ADD9A9 /* checkbox2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox2.png; sourceTree = "<group>"; };
 		CA7796451782659300183DC7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CAD6877A177ED36000BA2A6C /* ZH29UIControlTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZH29UIControlTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD6877D177ED36000BA2A6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -145,6 +149,8 @@
 			children = (
 				CAD687BB177ED7AA00BA2A6C /* checked.png */,
 				CAD687BC177ED7AA00BA2A6C /* unchecked.png */,
+				CA4A560017826BCC00ADD9A9 /* checkbox.png */,
+				CA4A560117826BCC00ADD9A9 /* checkbox2.png */,
 				CAD68785177ED36000BA2A6C /* ZH29UIControlTest-Info.plist */,
 				CAD68786177ED36000BA2A6C /* InfoPlist.strings */,
 				CAD68789177ED36000BA2A6C /* main.m */,
@@ -254,6 +260,8 @@
 				CAD6879A177ED36000BA2A6C /* ZHViewController.xib in Resources */,
 				CAD687BD177ED7AA00BA2A6C /* checked.png in Resources */,
 				CAD687BE177ED7AA00BA2A6C /* unchecked.png in Resources */,
+				CA4A560217826BCC00ADD9A9 /* checkbox.png in Resources */,
+				CA4A560317826BCC00ADD9A9 /* checkbox2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

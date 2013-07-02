@@ -15,15 +15,16 @@
 /**
  简单的callback
  **/
-//typedef void (^CheckBoxCallback)(BOOL isHighlighted);
-//CheckBoxCallback demoBlock= ^(BOOL isHighlighted)
-//{
-//  if(isHighlighted) {
-//    NSLog(@"Is Highlighted!");
-//  } else {
-//    NSLog(@"Not Highlighted");
-//  }
-//};
+typedef void (^CheckBoxCallback)(BOOL isSelected);
+CheckBoxCallback demoBlock= ^(BOOL isSelected)
+{
+  if(isSelected) {
+    NSLog(@"Highlighted!");
+  } else {
+    NSLog(@"UnHighlighted");
+  }
+};
+
 @interface ZHCustomCheckBox () {
   
   /**
@@ -34,29 +35,54 @@
 }
 
 @property (nonatomic, retain) UIImageView *imageView;
-
 @property (nonatomic, retain) UIImage *normalImage;
 @property (nonatomic, retain) UIImage *checkedImage;
 
-//- (void)changeImageWithState:(UIControlState)state;
-//
-//- (void)addCallbackForCheckBox:(CheckBoxCallback)callback;
+- (void)setCheckImage:(UIImage *)image forCheckBoxState:(BOOL)isChecked;
+- (void)setTitleText:(NSString *)text;
+
 @end
 
 @implementation ZHCustomCheckBox
 
 - (id)initCheckBoxWithFrame:(CGRect)frame
-              AligmentStyle:(CheckBoxAlignmentStyle)style
-                    numbers:(NSInteger)number
+              AligmentStyle:(ZHCheckBoxStyle)style
 {
   self = [super initWithFrame:frame];
   if (self) {
+    
+    UIImage *checkBoxNormalImage;
+    UIImage *checkBoxCheckedImage;
+    CGRect checkImageViewRect;
+    
+    switch (style) {
+      case ZHCheckBoxStyleRound:
+        checkBoxNormalImage = [UIImage imageNamed:@"unchecked.png"];
+        checkBoxCheckedImage = [UIImage imageNamed:@"checked.png"];
+        checkImageViewRect = CGRectMake(0, 0, 22, 22);
+        break;
+      case ZHCheckBoxStyleRect:
+        checkBoxNormalImage = [UIImage imageNamed:@"checkbox2.png"];
+        checkBoxCheckedImage = [UIImage imageNamed:@"checkbox.png"];
+        checkImageViewRect = CGRectMake(0, 0, 16, 16);
+        break;
+      default:
+        break;
+    }
+    
     CGPoint point = frame.origin;
-    [self setCheckImage:[UIImage imageNamed:@"checked.png"] forCheckBoxState:YES];
-    [self setCheckImage:[UIImage imageNamed:@"unchecked.png"] forCheckBoxState:NO];
-    self.checkBoxImageView = [[UIImageView alloc] initWithFrame:CGRectMake(point.x, point.y, 22, 22)];
-    [_checkBoxImageView setImage:[UIImage imageNamed:@"unchecked.png"]];
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x + 30, point.y, 0, 0)];
+    CGSize size = checkImageViewRect.size;
+    [self setCheckImage:checkBoxCheckedImage forCheckBoxState:YES];
+    [self setCheckImage:checkBoxNormalImage forCheckBoxState:NO];
+    self.checkBoxImageView = [[UIImageView alloc] initWithFrame:CGRectMake(point.x,
+                                                                           point.y,
+                                                                           size.width,
+                                                                           size.height)];
+    [_checkBoxImageView setImage:checkBoxNormalImage];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x + 30,
+                                                                point.y,
+                                                                0,
+                                                                0)];
     [self addSubview:_checkBoxImageView];
     [self addSubview:_titleLabel];
     [self setTitleText:@"UnChecked"];
@@ -74,6 +100,7 @@
 
 - (void)Checked:(id)sender
 {
+  [self setSelected:!self.selected];
   if (self.isSelected) {
     [self.checkBoxImageView setImage:_checkedImage];
     [self setTitleText:@"Checked"];
@@ -83,7 +110,7 @@
     [self setTitleText:@"UnChecked"];
     NSLog(@"UnSelected");
   }
-  [self setSelected:!self.selected];
+  demoBlock(self.isSelected);
 }
 
 - (void)setCheckImage:(UIImage *)image forCheckBoxState:(BOOL)isChecked
@@ -92,15 +119,6 @@
     self.checkedImage = image;
   } else {
     self.normalImage = image;
-  }
-}
-
-- (void)setHighlighted:(BOOL)highlighted
-{
-  if (highlighted) {
-    NSLog(@"Highlight");
-  } else {
-    NSLog(@"UnHighlight");
   }
 }
 

@@ -18,6 +18,11 @@ typedef NS_ENUM(NSInteger, CheckBoxState) {
   CheckBoxStateNormal     = 1 << 1
 };
 
+typedef enum ZHCheckBoxStyle_ {
+  ZHCheckBoxStyleRound,
+  ZHCheckBoxStyleRect
+} ZHCheckBoxStyle;
+
 @interface ZHCustomCheckBox : UIControl
 
 @property (nonatomic, retain) UILabel *titleLabel;
@@ -25,14 +30,13 @@ typedef NS_ENUM(NSInteger, CheckBoxState) {
 
 @property (nonatomic, assign) CheckBoxState checkBoxState;
 
-
-- (void)setCheckImage:(UIImage *)image forCheckBoxState:(BOOL)isChecked;
-
-- (void)setTitleText:(NSString *)text;
-
+/**
+  CheckBox构造方法
+ frame：checkBox的坐标大小
+ style：checkBox的外观样式，目前有两种rect和round
+ **/
 - (id)initCheckBoxWithFrame:(CGRect)frame
-              AligmentStyle:(CheckBoxAlignmentStyle)style
-                    numbers:(NSInteger)number;
+              AligmentStyle:(ZHCheckBoxStyle)style;
 
 
 @end
