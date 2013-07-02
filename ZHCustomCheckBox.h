@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef NS_ENUM(NSInteger, CheckBoxAlignmentStyle) {
-  CheckBoxAlignmentStyleHorizontal,
-  CheckBoxAlignmentStyleVertical
-};
-
-typedef NS_ENUM(NSInteger, CheckBoxState) {
-  CheckBoxStateSelected   = 0,
-  CheckBoxStateHighlight  = 1 << 0,
-  CheckBoxStateNormal     = 1 << 1
-};
+//typedef NS_ENUM(NSInteger, CheckBoxAlignmentStyle) {
+//  CheckBoxAlignmentStyleHorizontal,
+//  CheckBoxAlignmentStyleVertical
+//};
+//
+//typedef NS_ENUM(NSInteger, CheckBoxState) {
+//  CheckBoxStateSelected   = 0,
+//  CheckBoxStateHighlight  = 1 << 0,
+//  CheckBoxStateNormal     = 1 << 1
+//};
 
 typedef enum ZHCheckBoxStyle_ {
   ZHCheckBoxStyleRound,
@@ -26,9 +26,6 @@ typedef enum ZHCheckBoxStyle_ {
 @interface ZHCustomCheckBox : UIControl
 
 @property (nonatomic, retain) UILabel *titleLabel;
-@property (nonatomic, retain) UIImageView *checkBoxImageView;
-
-@property (nonatomic, assign) CheckBoxState checkBoxState;
 
 /**
   CheckBox构造方法

@@ -33,8 +33,7 @@ CheckBoxCallback demoBlock= ^(BOOL isSelected)
   CGFloat HorizontalBoxNumber;
   CGFloat VerticalBoxNumber;
 }
-
-@property (nonatomic, retain) UIImageView *imageView;
+@property (nonatomic, retain) UIImageView *checkBoxImageView;
 @property (nonatomic, retain) UIImage *normalImage;
 @property (nonatomic, retain) UIImage *checkedImage;
 
